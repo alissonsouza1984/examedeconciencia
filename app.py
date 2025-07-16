@@ -160,20 +160,6 @@ pecados = {
 
 }
 
-# ✅ Função auxiliar para obter o santo do dia
-def obter_santo_do_dia(data_iso):
-    try:
-        url = f"https://www.vaticannews.va/pt/santo-do-dia/_jcr_content/main-content-parsys/lista_santos.{data_iso}.json"
-        response = requests.get(url)
-        response.raise_for_status()
-        santos = response.json()
-        if santos and isinstance(santos, list) and "title" in santos[0]:
-            return santos[0]["title"]
-        else:
-            return "Santo do dia não encontrado"
-    except Exception as e:
-        print("Erro ao obter santo do dia:", e)
-        return "Santo do dia não disponível"
 
 # ✅ Rota principal
 @app.route("/", methods=["GET", "POST"])
@@ -326,7 +312,6 @@ def liturgia():
             "data": dados_api.get("data"),
             "titulo": dados_api.get("liturgia", "Liturgia do Dia"),
             "cor": dados_api.get("cor", "Cor litúrgica não informada"),
-            "santo": obter_santo_do_dia(data_iso),
             "dia": dados_api.get("dia", ""),
             "oferendas": dados_api.get("oferendas", ""),
             "comunhao": dados_api.get("comunhao", ""),
