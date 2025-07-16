@@ -283,27 +283,27 @@ def liturgia():
         dados_api = response.json()
 
         # Formata os dados para o template
-        dados = {
-            "dia": datetime.now().strftime("%d/%m/%Y"),
-            "santo": dados_api.get("liturgia", {}).get("santo", "Não informado"),
-            "primeiraLeitura": {
-                "texto": dados_api.get("liturgia", {}).get("leitura1", "Não encontrada"),
-                "referencia": "Primeira Leitura"
-            },
-            "salmo": {
-                "texto": dados_api.get("liturgia", {}).get("salmo", "Não encontrado"),
-                "referencia": "Salmo"
-            },
-            "evangelho": {
-                "texto": dados_api.get("liturgia", {}).get("evangelho", "Não encontrado"),
-                "referencia": "Evangelho"
-            }
+    dados = {
+        "dia": datetime.now().strftime("%d/%m/%Y"),
+        "santo": dados_api.get("santo", "Não informado"),
+        "primeiraLeitura": {
+            "texto": dados_api.get("leitura1", "Não encontrada"),
+            "referencia": "Primeira Leitura"
+        },
+        "salmo": {
+            "texto": dados_api.get("salmo", "Não encontrado"),
+            "referencia": "Salmo"
+        },
+        "evangelho": {
+            "texto": dados_api.get("evangelho", "Não encontrado"),
+            "referencia": "Evangelho"
         }
+    }   
 
-        return render_template("liturgia.html", dados=dados)
+    return render_template("liturgia.html", dados=dados)
 
-    except Exception as e:
-        return f"Erro ao carregar a liturgia: {e}", 500
+except Exception as e:
+    return f"Erro ao carregar a liturgia: {e}", 500
 
 
 if __name__ == "__main__":
