@@ -280,32 +280,32 @@ def liturgia():
         response.raise_for_status()
         dados_api = response.json()
 
-        # Tratamento seguro dos dados
-        leitura1 = dados_api.get("leitura1")
-        salmo = dados_api.get("salmo")
-        evangelho = dados_api.get("evangelho")
-
-        # Normaliza salmo e evangelho se forem dicionários
-        def extrair_dados(campo):
-            if isinstance(campo, dict):
+        def extrair_texto(obj):
+            if isinstance(obj, dict):
                 return {
-                    "texto": campo.get("texto", "Texto não disponível"),
-                    "referencia": campo.get("referencia", "Sem referência")
+                    "titulo": obj.get("titulo", ""),
+                    "texto": obj.get("texto", "Texto não disponível"),
+                    "referencia": obj.get("referencia", "Sem referência")
                 }
             return {
-                "texto": campo or "Texto não disponível",
+                "titulo": "",
+                "texto": obj or "Texto não disponível",
                 "referencia": "Sem referência"
             }
 
         dados = {
-            "dia": datetime.now().strftime("%d/%m/%Y"),
+            "data": dados_api.get("data"),
+            "titulo": dados_api.get("liturgia", "Liturgia do Dia"),
+            "cor": dados_api.get("cor", "Cor litúrgica não informada"),
             "santo": dados_api.get("santo", "Não informado"),
-            "primeiraLeitura": {
-                "texto": leitura1 if isinstance(leitura1, str) else "Não encontrada",
-                "referencia": "Primeira Leitura"
-            },
-            "salmo": extrair_dados(salmo),
-            "evangelho": extrair_dados(evangelho)
+            "dia": dados_api.get("dia", ""),
+            "oferendas": dados_api.get("oferendas", ""),
+            "comunhao": dados_api.get("comunhao", ""),
+            "segundaLeitura": dados_api.get("segundaLeitura", ""),
+            "antifonas": dados_api.get("antifonas", {}),
+            "primeiraLeitura": extrair_texto(dados_api.get("primeiraLeitura")),
+            "salmo": extrair_texto(dados_api.get("salmo")),
+            "evangelho": extrair_texto(dados_api.get("evangelho")),
         }
 
         return render_template("liturgia.html", dados=dados)

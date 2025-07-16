@@ -2,22 +2,36 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>Liturgia do Dia</title>
+  <title>{{ dados.titulo }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <style>
     .card-liturgia {
       margin-bottom: 2rem;
       border-left: 5px solid #d4af37;
       background-color: #fffef8;
-      padding: 1rem;
+      padding: 1.5rem;
       border-radius: 8px;
+      font-size: 1.2rem;
+      line-height: 1.6;
     }
-
     .card-liturgia h3 {
       color: #4a3820;
       font-weight: bold;
+      font-size: 1.5rem;
     }
-
+    .titulo-dia {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #6a4f28;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .subtitulo {
+      font-style: italic;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #555;
+    }
     .back-link {
       display: inline-block;
       margin-top: 1rem;
@@ -25,7 +39,6 @@
       text-decoration: none;
       font-weight: bold;
     }
-
     .back-link:hover {
       text-decoration: underline;
     }
@@ -37,29 +50,64 @@
       <img src="{{ url_for('static', filename='img/cristo_pantocrator.jpg') }}" alt="Cristo Pantocrator" />
     </div>
 
-    <h1 class="title">📖 Leitura Bíblica do Dia</h1>
-    <p><strong>📅 Data:</strong> {{ dados.dia }}</p>
+    <div class="titulo-dia">{{ dados.titulo }}</div>
+    <div class="subtitulo">Cor Litúrgica: {{ dados.cor }} — {{ dados.data }}</div>
+
+    {% if dados.antifonas.entrada %}
+    <div class="card-liturgia">
+      <h3>🔸 Antífona de Entrada</h3>
+      <p>{{ dados.antifonas.entrada }}</p>
+    </div>
+    {% endif %}
 
     <div class="card-liturgia">
-      <h3>📖 Primeira Leitura</h3>
-      <p>{{ dados.primeiraLeitura.texto }}</p>
-      <p><em>{{ dados.primeiraLeitura.referencia }}</em></p>
+      <h3>🙏 Oração do Dia</h3>
+      <p>{{ dados.dia }}</p>
     </div>
 
     <div class="card-liturgia">
+      <h3>📖 Primeira Leitura</h3>
+      <p><strong>{{ dados.primeiraLeitura.referencia }}</strong> – {{ dados.primeiraLeitura.titulo }}</p>
+      <p>{{ dados.primeiraLeitura.texto }}</p>
+    </div>
+
+    {% if dados.segundaLeitura and "Não há" not in dados.segundaLeitura %}
+    <div class="card-liturgia">
+      <h3>📘 Segunda Leitura</h3>
+      <p>{{ dados.segundaLeitura }}</p>
+    </div>
+    {% endif %}
+
+    <div class="card-liturgia">
       <h3>🎵 Salmo</h3>
-      <p>{{ dados.salmo.texto }}</p>
-      <p><em>{{ dados.salmo.referencia }}</em></p>
+      <p><strong>{{ dados.salmo.referencia }}</strong></p>
+      <p>{{ dados.salmo.texto.replace('—', '<br>—') | safe }}</p>
     </div>
 
     <div class="card-liturgia">
       <h3>✠ Evangelho</h3>
+      <p><strong>{{ dados.evangelho.referencia }}</strong> – {{ dados.evangelho.titulo }}</p>
       <p>{{ dados.evangelho.texto }}</p>
-      <p><em>{{ dados.evangelho.referencia }}</em></p>
     </div>
 
-    <p><strong>℣ Santo do dia:</strong> {{ dados.santo }}</p>
+    <div class="card-liturgia">
+      <h3>🕊️ Ofertório</h3>
+      <p>{{ dados.oferendas }}</p>
+    </div>
 
+    <div class="card-liturgia">
+      <h3>💟 Comunhão</h3>
+      <p>{{ dados.comunhao }}</p>
+    </div>
+
+    {% if dados.antifonas.comunhao %}
+    <div class="card-liturgia">
+      <h3>🎶 Antífona de Comunhão</h3>
+      <p>{{ dados.antifonas.comunhao }}</p>
+    </div>
+    {% endif %}
+
+    <p><strong>℣ Santo do dia:</strong> {{ dados.santo }}</p>
     <a href="/" class="back-link">← Voltar</a>
   </div>
 </body>
