@@ -1,0 +1,3 @@
+Flask==2.3.3
+WeasyPrint==53.0
+gunicorn
