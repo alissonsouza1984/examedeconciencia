@@ -1,3 +1,5 @@
+import requests
+from datetime import datetime
 from flask import Flask, render_template, request, Response, url_for
 from weasyprint import HTML
 from io import BytesIO
@@ -270,41 +272,37 @@ def oracoes():
         }
     ]
     return render_template("oracoes.html", oracoes=oracoes_lista)
-
+from datetime import datetime
 import requests
-  2 from datetime import datetime
-  3
-  4 @app.route("/liturgia")
-  5 def liturgia():
-  6     try:
-  7         # Chama a API da liturgia diária
-  8         response = requests.get("https://liturgia.up.railway.app/")
-  9         response.raise_for_status()
- 10         dados_api = response.json()
- 11
- 12         # Formata os dados para o template
- 13         dados = {
- 14             "dia": datetime.now().strftime("%d/%m/%Y"),
- 15             "santo": dados_api.get("santo", "Não informado"),
- 16             "primeiraLeitura": {
- 17                 "texto": dados_api.get("leitura1", "Não encontrada"),
- 18                 "referencia": "Primeira Leitura"
- 19             },
- 20             "salmo": {
- 21                 "texto": dados_api.get("salmo", "Não encontrado"),
- 22                 "referencia": "Salmo"
- 23             },
- 24             "evangelho": {
- 25                 "texto": dados_api.get("evangelho", "Não encontrado"),
- 26                 "referencia": "Evangelho"
- 27             }
- 28         }
- 29
- 30         return render_template("liturgia.html", dados=dados)
- 31
- 32     except Exception as e:
- 33         return f"Erro ao carregar a liturgia: {e}", 500
- 34
- 35
- 36 if __name__ == "__main__":
- 37     app.run(host="0.0.0.0", port=5000, debug=True)
+
+@app.route("/liturgia")
+def liturgia():
+    try:
+        # Chama a API da liturgia diária
+        response = requests.get("https://liturgia.up.railway.app/")
+        response.raise_for_status()
+        dados_api = response.json()
+
+        # Formata os dados para o template
+        dados = {
+            "dia": datetime.now().strftime("%d/%m/%Y"),
+            "santo": dados_api.get("santo", "Não informado"),
+            "primeiraLeitura": {
+                "texto": dados_api.get("leitura1", "Não encontrada"),
+                "referencia": "Primeira Leitura"
+            },
+            "salmo": {
+                "texto": dados_api.get("salmo", "Não encontrado"),
+                "referencia": "Salmo"
+            },
+            "evangelho": {
+                "texto": dados_api.get("evangelho", "Não encontrado"),
+                "referencia": "Evangelho"
+            }
+        }
+
+        return render_template("liturgia.html", dados=dados)
+
+    except Exception as e:
+        return f"Erro ao carregar a liturgia: {e}", 500
+
