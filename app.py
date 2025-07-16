@@ -312,17 +312,16 @@ def liturgia():
 def obter_santo_do_dia(data_iso):
     try:
         url = f"https://www.vaticannews.va/pt/santo-do-dia/_jcr_content/main-content-parsys/lista_santos.{data_iso}.json"
-        r = requests.get(url)
-        r.raise_for_status()
-        santos = r.json()
-        if santos and isinstance(santos, list):
-            return santos[0].get("title", "Santo do dia não encontrado")
-    except:
-        pass
-    return "Santo do dia não disponível"
-
-
+        response = requests.get(url)
+        response.raise_for_status()
+        santos = response.json()
+        if santos and isinstance(santos, list) and "title" in santos[0]:
+            return santos[0]["title"]
+        else:
+            return "Santo do dia não encontrado"
     except Exception as e:
-        return f"Erro ao carregar a liturgia: {e}", 500
+        print("Erro ao obter santo do dia:", e)
+        return "Santo do dia não disponível"
 
-
+if __name__ == "__main__":
+  8     app.run(host="0.0.0.0", port=5000, debug=True)
