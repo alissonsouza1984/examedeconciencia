@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>📖 Leitura Bíblica do Dia</h1>
+
+<h2>📅 {{ dados.dia }}</h2>
+
+<h3>Old Testament</h3>
+<p>{{ dados.primeiraLeitura.texto }}</p>
+<p><em>{{ dados.primeiraLeitura.referencia }}</em></p>
+
+<h3>Salmo</h3>
+<p>{{ dados.salmo.texto }}</p>
+<p><em>{{ dados.salmo.referencia }}</em></p>
+
+<h3>✠ Evangelho</h3>
+<p>{{ dados.evangelho.texto }}</p>
+<p><em>{{ dados.evangelho.referencia }}</em></p>
+
+<p>℣ Santo do dia: {{ dados.santo }}</p>
+
+<a href="/" class="btn btn-primary">← Voltar</a>
+{% endblock %}
