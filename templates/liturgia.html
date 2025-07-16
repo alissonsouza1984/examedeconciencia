@@ -1,22 +1,67 @@
-{% extends "base.html" %}
-{% block content %}
-<h1>📖 Leitura Bíblica do Dia</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Liturgia do Dia</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    .card-liturgia {
+      margin-bottom: 2rem;
+      border-left: 5px solid #d4af37;
+      background-color: #fffef8;
+      padding: 1rem;
+      border-radius: 8px;
+    }
 
-<h2>📅 {{ dados.dia }}</h2>
+    .card-liturgia h3 {
+      color: #4a3820;
+      font-weight: bold;
+    }
 
-<h3>Old Testament</h3>
-<p>{{ dados.primeiraLeitura.texto }}</p>
-<p><em>{{ dados.primeiraLeitura.referencia }}</em></p>
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #4a3820;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-<h3>Salmo</h3>
-<p>{{ dados.salmo.texto }}</p>
-<p><em>{{ dados.salmo.referencia }}</em></p>
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="page-body">
+  <div class="container my-5">
+    <div class="icon">
+      <img src="{{ url_for('static', filename='img/cristo_pantocrator.jpg') }}" alt="Cristo Pantocrator" />
+    </div>
 
-<h3>✠ Evangelho</h3>
-<p>{{ dados.evangelho.texto }}</p>
-<p><em>{{ dados.evangelho.referencia }}</em></p>
+    <h1 class="title">📖 Leitura Bíblica do Dia</h1>
+    <p><strong>📅 Data:</strong> {{ dados.dia }}</p>
 
-<p>℣ Santo do dia: {{ dados.santo }}</p>
+    <div class="card-liturgia">
+      <h3>📖 Primeira Leitura</h3>
+      <p>{{ dados.primeiraLeitura.texto }}</p>
+      <p><em>{{ dados.primeiraLeitura.referencia }}</em></p>
+    </div>
 
-<a href="/" class="btn btn-primary">← Voltar</a>
-{% endblock %}
+    <div class="card-liturgia">
+      <h3>🎵 Salmo</h3>
+      <p>{{ dados.salmo.texto }}</p>
+      <p><em>{{ dados.salmo.referencia }}</em></p>
+    </div>
+
+    <div class="card-liturgia">
+      <h3>✠ Evangelho</h3>
+      <p>{{ dados.evangelho.texto }}</p>
+      <p><em>{{ dados.evangelho.referencia }}</em></p>
+    </div>
+
+    <p><strong>℣ Santo do dia:</strong> {{ dados.santo }}</p>
+
+    <a href="/" class="back-link">← Voltar</a>
+  </div>
+</body>
+</html>
+
