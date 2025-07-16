@@ -271,15 +271,6 @@ def oracoes():
     ]
     return render_template("oracoes.html", oracoes=oracoes_lista)
 
-@app.route("/liturgia")
-def liturgia():
-    try:
-        response = requests.get("https://liturgia.net/liturgia/api/hoje ")
-        dados = response.json()
-        return render_template("liturgia.html", dados=dados)
-    except Exception as e:
-        return "Erro ao carregar leitura do dia", 500
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
 
