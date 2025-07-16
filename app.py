@@ -297,7 +297,7 @@ def liturgia():
             "data": dados_api.get("data"),
             "titulo": dados_api.get("liturgia", "Liturgia do Dia"),
             "cor": dados_api.get("cor", "Cor litúrgica não informada"),
-            "santo": dados_api.get("santo", "Não informado"),
+            "santo": obter_santo_do_dia(dados_api.get("data", datetime.now().strftime("%Y-%m-%d"))),
             "dia": dados_api.get("dia", ""),
             "oferendas": dados_api.get("oferendas", ""),
             "comunhao": dados_api.get("comunhao", ""),
@@ -309,6 +309,18 @@ def liturgia():
         }
 
         return render_template("liturgia.html", dados=dados)
+def obter_santo_do_dia(data_iso):
+    try:
+        url = f"https://www.vaticannews.va/pt/santo-do-dia/_jcr_content/main-content-parsys/lista_santos.{data_iso}.json"
+        r = requests.get(url)
+        r.raise_for_status()
+        santos = r.json()
+        if santos and isinstance(santos, list):
+            return santos[0].get("title", "Santo do dia não encontrado")
+    except:
+        pass
+    return "Santo do dia não disponível"
+
 
     except Exception as e:
         return f"Erro ao carregar a liturgia: {e}", 500
