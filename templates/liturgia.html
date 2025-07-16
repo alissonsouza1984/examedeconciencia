@@ -79,10 +79,15 @@
     {% endif %}
 
     <div class="card-liturgia">
-      <h3>🎵 Salmo</h3>
-      <p><strong>{{ dados.salmo.referencia }}</strong></p>
-      <p>{{ dados.salmo.texto.replace('—', '<br>—') | safe }}</p>
+    <h3>🎵 Salmo</h3>
+    <p><strong>{{ dados.salmo.referencia }}</strong></p>
+
+     {% if dados.salmo.refrao %}
+    <p><strong>R:</strong> <strong>{{ dados.salmo.refrao }}</strong></p>
+    {% endif %}
+    <p>{{ dados.salmo.texto.replace('—', '<br>—') | safe }}</p>
     </div>
+ 
 
     <div class="card-liturgia">
       <h3>✠ Evangelho</h3>

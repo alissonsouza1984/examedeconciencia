@@ -218,16 +218,77 @@ def oracoes():
         {
             "id": 1,
             "titulo": "Oração do Arrependimento",
-            "texto": "Meu Jesus, por serdes tão bom, e por me amardes tanto...",
+            "texto": (
+                "Meu Jesus, por serdes tão bom, e por me amardes tanto, vos agradeço por me terdes esperado até agora e não terdes permitido que eu morresse em pecado. "
+                "Peço-vos, por vossa paixão e morte na cruz, perdoai-me todos os meus pecados e fazei-me verdadeiramente penitente..."
+            ),
             "descricao": "Para momentos de reflexão e conversão interior."
         },
         {
             "id": 2,
             "titulo": "Confissão Geral",
-            "texto": "Senhor meu Deus, reconheço diante de Vós que pequei muitas vezes...",
+            "texto": (
+                "Senhor meu Deus, reconheço diante de Vós que pequei muitas vezes por pensamentos, palavras, atos e omissões. "
+                "Arrependo-me sinceramente de todas as minhas faltas e ofensas, especialmente daquelas que mais feriram o vosso amor. "
+                "Com humildade, suplico a vossa misericórdia e, como o filho pródigo, digo: Pai, pequei contra o Céu e contra Vós. "
+                "Não sou digno de ser chamado vosso filho. Tende piedade de mim, Senhor. Amém."
+            ),
             "descricao": "Ideal para preparação antes da confissão sacramental."
         },
-        # ... (demais orações)
+        {
+            "id": 3,
+            "titulo": "Miserere Mei Deus",
+            "texto": (
+                "Tende piedade de mim, ó Deus, segundo a vossa misericórdia; "
+                "segundo a grandeza da vossa compaixão, apagai a minha culpa. "
+                "Lavai-me totalmente da minha iniquidade, e purificai-me do meu pecado. "
+                "Criai em mim, ó Deus, um coração puro e renovai em meu peito um espírito firme."
+            ),
+            "descricao": "Um dos salmos penitenciais mais conhecidos da tradição cristã."
+        },
+        {
+            "id": 4,
+            "titulo": "Do Profundo",
+            "texto": (
+                "Das profundezas clamo a Vós, Senhor. Senhor, escutai a minha voz! "
+                "Estejam atentos os vossos ouvidos às súplicas da minha prece. "
+                "Se levardes em conta nossas faltas, Senhor, quem poderá subsistir? "
+                "Mas em Vós se encontra o perdão, e por isso Vos teme com reverência."
+            ),
+            "descricao": "Uma poderosa expressão de esperança na misericórdia divina."
+        },
+        {
+            "id": 5,
+            "titulo": "Salmo 6",
+            "texto": (
+                "Senhor, não me repreendais em vossa ira, nem me castigueis no vosso furor. "
+                "Tende piedade de mim, Senhor, pois desfaleço; curai-me, Senhor, pois meus ossos tremem. "
+                "A minha alma está profundamente perturbada... Salvai-me por causa da vossa misericórdia!"
+            ),
+            "descricao": "Suplica o perdão e a cura espiritual e física."
+        },
+        {
+            "id": 6,
+            "titulo": "Acto de Contrição",
+            "texto": (
+                "Meu Deus, arrependo-me de todo o coração de Vos ter ofendido, "
+                "porque sois infinitamente bom e digno de ser amado sobre todas as coisas. "
+                "Proponho firmemente, com o auxílio da vossa graça, emendar-me e evitar as ocasiões de pecado. "
+                "Senhor, pela paixão de Jesus Cristo, tende piedade de mim. Amém."
+            ),
+            "descricao": "Expressa arrependimento sincero e desejo de mudança."
+        },
+        {
+            "id": 7,
+            "titulo": "Oração à Virgem Maria",
+            "texto": (
+                "Ó Maria Santíssima, Mãe de Deus e minha Mãe, refugio-me sob a vossa proteção maternal. "
+                "Vós que sois a Medianeira de todas as graças, intercedei por mim junto a vosso Filho Jesus. "
+                "Alcançai-me a graça do verdadeiro arrependimento, uma boa confissão e a perseverança no bem. "
+                "Acompanhai-me em todos os momentos da vida, sobretudo na hora da morte. Amém."
+            ),
+            "descricao": "Peça a intercessão de Nossa Senhora após o exame de consciência."
+        }
     ]
     return render_template("oracoes.html", oracoes=oracoes_lista)
 
@@ -244,19 +305,28 @@ def liturgia():
                 return {
                     "titulo": obj.get("titulo", ""),
                     "texto": obj.get("texto", "Texto não disponível"),
-                    "referencia": obj.get("referencia", "Sem referência")
+                    "referencia": obj.get("referencia", "Sem referência"),
+                    "refrao": obj.get("refrao", "")  # agora extrai o refrão também
                 }
             return {
                 "titulo": "",
                 "texto": obj or "Texto não disponível",
-                "referencia": "Sem referência"
+                "referencia": "Sem referência",
+                "refrao": ""
             }
+
+        # Corrige a data para uso na API do Vaticano (Santo do Dia)
+        data_api = dados_api.get("data", datetime.now().strftime("%d/%m/%Y"))
+        try:
+            data_iso = datetime.strptime(data_api, "%d/%m/%Y").strftime("%Y-%m-%d")
+        except ValueError:
+            data_iso = datetime.now().strftime("%Y-%m-%d")
 
         dados = {
             "data": dados_api.get("data"),
             "titulo": dados_api.get("liturgia", "Liturgia do Dia"),
             "cor": dados_api.get("cor", "Cor litúrgica não informada"),
-            "santo": obter_santo_do_dia(datetime.now().strftime("%Y-%m-%d")),
+            "santo": obter_santo_do_dia(data_iso),
             "dia": dados_api.get("dia", ""),
             "oferendas": dados_api.get("oferendas", ""),
             "comunhao": dados_api.get("comunhao", ""),
@@ -268,6 +338,7 @@ def liturgia():
         }
 
         return render_template("liturgia.html", dados=dados)
+
     except Exception as e:
         return f"Erro ao carregar a liturgia: {e}", 500
 
