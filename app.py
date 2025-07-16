@@ -273,36 +273,44 @@ def oracoes():
     ]
     return render_template("oracoes.html", oracoes=oracoes_lista)
 from datetime import datetime
-import requests
-
 @app.route("/liturgia")
 def liturgia():
     try:
-        # Chama a API da liturgia diária
         response = requests.get("https://liturgia.up.railway.app/")
         response.raise_for_status()
         dados_api = response.json()
 
-        # Formata os dados para o template
+        # Tratamento seguro dos dados
+        leitura1 = dados_api.get("leitura1")
+        salmo = dados_api.get("salmo")
+        evangelho = dados_api.get("evangelho")
+
+        # Normaliza salmo e evangelho se forem dicionários
+        def extrair_dados(campo):
+            if isinstance(campo, dict):
+                return {
+                    "texto": campo.get("texto", "Texto não disponível"),
+                    "referencia": campo.get("referencia", "Sem referência")
+                }
+            return {
+                "texto": campo or "Texto não disponível",
+                "referencia": "Sem referência"
+            }
+
         dados = {
             "dia": datetime.now().strftime("%d/%m/%Y"),
             "santo": dados_api.get("santo", "Não informado"),
             "primeiraLeitura": {
-                "texto": dados_api.get("leitura1", "Não encontrada"),
+                "texto": leitura1 if isinstance(leitura1, str) else "Não encontrada",
                 "referencia": "Primeira Leitura"
             },
-            "salmo": {
-                "texto": dados_api.get("salmo", "Não encontrado"),
-                "referencia": "Salmo"
-            },
-            "evangelho": {
-                "texto": dados_api.get("evangelho", "Não encontrado"),
-                "referencia": "Evangelho"
-            }
+            "salmo": extrair_dados(salmo),
+            "evangelho": extrair_dados(evangelho)
         }
 
         return render_template("liturgia.html", dados=dados)
 
     except Exception as e:
         return f"Erro ao carregar a liturgia: {e}", 500
+
 
