@@ -256,7 +256,7 @@ def liturgia():
             "data": dados_api.get("data"),
             "titulo": dados_api.get("liturgia", "Liturgia do Dia"),
             "cor": dados_api.get("cor", "Cor litúrgica não informada"),
-            "santo": obter_santo_do_dia(dados_api.get("data", datetime.now().strftime("%Y-%m-%d"))),
+            "santo": obter_santo_do_dia(datetime.now().strftime("%Y-%m-%d")),
             "dia": dados_api.get("dia", ""),
             "oferendas": dados_api.get("oferendas", ""),
             "comunhao": dados_api.get("comunhao", ""),
