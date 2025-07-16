@@ -1,3 +1,4 @@
+app.py
 from flask import Flask, render_template, request, Response, url_for
 from weasyprint import HTML
 from io import BytesIO
@@ -6,111 +7,157 @@ app = Flask(__name__)
 
 pecados = {
     "1. Amar a Deus sobre todas as coisas": [
-        "Negligência na oração diária",
-        "Dúvidas sobre a fé e críticas aos ensinamentos da Igreja",
-        "Desânimo espiritual e revolta contra Deus",
-        "Frequentar cultos ou práticas supersticiosas (ex: cartomantes, horóscopos)",
-        "Buscar glória pessoal acima da vontade de Deus",
-        "Orgulho, vaidade ou apego a elogios",
-        "Apego excessivo ao dinheiro e aos bens materiais"
+        "Negligenciei minha oração diária",
+        "Tive dúvidas sobre a fé e critiquei os ensinamentos da Igreja",
+        "Senti desânimo espiritual e me revoltei contra Deus",
+        "Frequentei cultos ou práticas supersticiosas (ex: cartomantes, horóscopos)",
+        "Busquei minha própria glória em vez da vontade de Deus",
+        "Fui orgulhoso, vaidoso ou apegado a elogios",
+        "Apeguei-me excessivamente ao dinheiro e aos bens materiais",
+        "Fui impaciente e pouco tolerante com os outros",
+        "Fui indiferente diante do sofrimento alheio",
+        "Faltou-me empatia e amor ao próximo",
+        "Levei outros ao pecado com meus conselhos, atitudes ou exemplos",
+        "Ignorei oportunidades de praticar caridade"
     ],
     "2. Não tomar o nome de Deus em vão": [
-        "Usar o nome de Deus ou dos santos de forma desrespeitosa",
-        "Ridicularizar símbolos da fé ou religiosos",
-        "Fazer promessas sem intenção de cumprir",
-        "Juramentos falsos ou desnecessários",
-        "Permitir ou rir quando outros zombam da fé"
+        "Usei o nome de Deus ou dos santos de forma desrespeitosa",
+        "Ridicularizei símbolos da fé ou religiosos",
+        "Fiz promessas sem intenção de cumprir",
+        "Fiz juramentos falsos ou desnecessários",
+        "Permiti ou ri quando outros zombaram da fé",
+        "Usei expressões religiosas com banalidade ou em vão"
     ],
     "3. Guardar domingos e festas de guarda": [
-        "Faltar à missa dominical ou em dias santos sem necessidade grave",
-        "Chegar intencionalmente atrasado à missa ou sair antes da bênção final",
-        "Comungar em pecado mortal",
-        "Deixar de se confessar ao menos uma vez ao ano",
-        "Não jejuar ou não fazer abstinência quando mandado pela Igreja",
-        "Negligenciar a ajuda material à Igreja"
+        "Faltei à missa dominical ou em dias santos sem necessidade grave",
+        "Cheguei intencionalmente atrasado à missa ou saí antes da bênção final",
+        "Comunguei estando em pecado mortal",
+        "Deixei de me confessar ao menos uma vez ao ano",
+        "Não jejuei ou não fiz abstinência quando mandado pela Igreja",
+        "Negligenciei a ajuda material à Igreja",
+        "Fui à missa por obrigação, sem esforço de viver a fé no dia a dia"
     ],
     "4. Honrar pai e mãe": [
-        "Desobediência e falta de respeito aos pais ou superiores",
-        "Negligência nos cuidados com os pais idosos ou doentes",
-        "Maltrato ao cônjuge em palavras ou atitudes",
-        "Dar mau exemplo aos filhos",
-        "Permitir influência negativa sobre os filhos (TV, internet, amizades)",
-        "Negligência na formação religiosa dos filhos",
-        "Deixar de corrigir os filhos por comodismo"
+        "Desobedeci e faltei com respeito aos meus pais ou superiores",
+        "Negligenciei os cuidados com meus pais idosos ou doentes",
+        "Maltratei meu cônjuge com palavras ou atitudes",
+        "Dei mau exemplo aos meus filhos",
+        "Permiti influências negativas sobre meus filhos (TV, internet, amizades)",
+        "Fui negligente na formação religiosa dos meus filhos",
+        "Deixei de corrigir meus filhos por comodismo",
+        "Fui ingrato com meus pais ou avós"
     ],
     "5. Não matar": [
-        "Ódio, rancor, inimizade ou desejo de vingança",
-        "Falta de perdão",
-        "Desejar a morte ou o mal a alguém (ou a si mesmo)",
-        "Aborto, eutanásia ou apoio a essas práticas",
-        "Descuido com a saúde (excesso de comida, drogas, bebida, sedentarismo)",
-        "Riscos desnecessários à vida (direção imprudente, vícios)",
-        "Dar escândalo ou mau exemplo"
+        "Alimentei ódio, rancor, inimizade ou desejo de vingança",
+        "Recusei-me a perdoar",
+        "Desejei a morte ou o mal a alguém (ou a mim mesmo)",
+        "Apoiei ou pratiquei aborto, eutanásia ou outras práticas semelhantes",
+        "Fui descuidado com minha saúde (excesso de comida, drogas, bebida, sedentarismo)",
+        "Assumi riscos desnecessários à minha vida (direção imprudente, vícios)",
+        "Dei escândalo ou mau exemplo",
+        "Proferi palavrões ou palavras agressivas contra os outros",
+        "Feri emocionalmente alguém com minhas palavras ou atitudes",
+        "Fui violento, mesmo verbalmente, com pessoas próximas"
     ],
     "6. Não pecar contra a castidade": [
-        "Pensamentos ou desejos impuros voluntários",
-        "Masturbação, pornografia, sexo fora do casamento",
-        "Infidelidade emocional ou física",
-        "Liberdades excessivas no namoro",
-        "Usar roupas provocativas com intenção",
-        "Conversas ou piadas imorais",
-        "Consumir conteúdo sexualizado (TV, filmes, redes sociais)",
-        "Amizades que me levam ao pecado"
+        "Consenti em pensamentos ou desejos impuros",
+        "Me masturbei, assisti pornografia ou tive relações sexuais fora do casamento",
+        "Fui infiel emocionalmente ou fisicamente",
+        "Tive liberdades excessivas no namoro",
+        "Usei roupas provocativas com má intenção",
+        "Participei de conversas ou fiz piadas imorais",
+        "Consumi conteúdo sexualizado (TV, filmes, redes sociais)",
+        "Mantive amizades que me levaram ao pecado",
+        "Fiz comentários maliciosos sobre o corpo de outras pessoas",
+        "Alimentei fantasias sexuais intencionalmente"
     ],
     "7. Não roubar": [
-        "Furto, desonestidade em contratos ou negócios",
-        "Apropriar-se de bens ou dinheiro indevidamente",
-        "Não pagar dívidas justas ou salários devidos",
-        "Desperdiçar o tempo no trabalho ou trabalhar com negligência",
-        "Vício em jogos de azar",
-        "Viver acima dos próprios meios"
+        "Roubei ou fui desonesto em contratos ou negócios",
+        "Me apropriei de bens ou dinheiro indevidamente",
+        "Deixei de pagar dívidas justas ou salários devidos",
+        "Desperdicei tempo no trabalho ou trabalhei com negligência",
+        "Fui viciado em jogos de azar",
+        "Vivi acima dos meus meios",
+        "Fui injusto ao cobrar ou receber valores excessivos",
+        "Usei benefícios ou ajudas indevidamente"
     ],
     "8. Não levantar falso testemunho": [
-        "Mentira habitual, mesmo sem prejudicar diretamente",
-        "Calúnia, difamação ou exagerar defeitos dos outros",
-        "Ouvir ou espalhar boatos",
-        "Julgar mal ou condenar injustamente alguém",
-        "Causar divisão entre pessoas por fofoca",
-        "Não reparar a má reputação causada por mim"
+        "Menti habitualmente, mesmo sem prejudicar diretamente",
+        "Caluniei, difamei ou exagerei defeitos dos outros",
+        "Ouvi ou espalhei boatos",
+        "Julguei mal ou condenei injustamente alguém",
+        "Causei divisão entre pessoas por fofoca",
+        "Não reparei a má reputação causada por mim",
+        "Fui hipócrita ou dissimulado para parecer melhor"
     ],
     "9. Não desejar a mulher do próximo": [
-        "Desejos impuros por pessoa casada ou consagrada",
-        "Fantasias ou intenções de infidelidade",
-        "Assédio verbal ou físico",
-        "Flertes com pessoas comprometidas",
-        "Curiosidade indevida sobre a intimidade alheia"
+        "Alimentei desejos impuros por pessoas casadas ou consagradas",
+        "Tive fantasias ou intenções de infidelidade",
+        "Assediei verbal ou fisicamente",
+        "Flertei com pessoas comprometidas",
+        "Tive curiosidade indevida sobre a intimidade de outras pessoas",
+        "Usei o olhar de maneira impura ou desrespeitosa"
     ],
     "10. Não cobiçar as coisas alheias": [
-        "Invejar os bens, sucesso ou talentos dos outros",
-        "Desejo de tomar ou imitar o que pertence a outro",
-        "Descontentamento com a própria vida por comparação"
+        "Invejei os bens, o sucesso ou os talentos dos outros",
+        "Desejei tomar ou imitar aquilo que pertence a outros",
+        "Fiquei descontente com a minha vida por causa de comparações",
+        "Fui ambicioso em excesso, sem gratidão pelo que tenho",
+        "Desejei viver a vida dos outros em vez de valorizar a minha"
     ],
     "Mandamentos da Igreja": [
-        "Faltar à Missa em festas de guarda",
-        "Não confessar-se ao menos uma vez por ano",
-        "Não comungar na Páscoa",
-        "Comungar em pecado grave",
-        "Não guardar jejum e abstinência nos tempos prescritos",
-        "Não ajudar a Igreja materialmente"
+        "Faltei à Missa em festas de guarda",
+        "Não me confessei ao menos uma vez por ano",
+        "Não comunguei na Páscoa",
+        "Comunguei em pecado grave",
+        "Não guardei jejum e abstinência nos tempos prescritos",
+        "Não ajudei a Igreja materialmente",
+        "Desprezei os sacramentos por comodismo ou frieza espiritual"
     ],
     "Pecados relacionados ao casamento e à família": [
-        "Negligência com o cônjuge (diálogo, carinho, atenção)",
-        "Violência física ou verbal dentro do lar",
-        "Desrespeito mútuo entre os cônjuges",
-        "Falta de perdão no matrimônio",
-        "Priorizar trabalho ou lazer em detrimento da família",
-        "Não se abrir à vida (rejeitar filhos sem justa causa)",
-        "Não dar testemunho cristão dentro do lar"
+        "Fui negligente com meu cônjuge (no diálogo, carinho ou atenção)",
+        "Fui violento física ou verbalmente dentro do lar",
+        "Desrespeitei meu cônjuge",
+        "Guardei mágoas e não perdoei no matrimônio",
+        "Priorizei trabalho ou lazer em detrimento da família",
+        "Recusei-me a ter filhos sem justa causa",
+        "Não dei testemunho cristão dentro do lar",
+        "Fui indiferente à vida familiar ou às necessidades dos meus",
+        "Usei palavras ofensivas ou humilhantes com meus familiares"
     ],
     "Pecados espirituais e morais": [
-        "Preguiça espiritual (não buscar crescer na fé)",
-        "Desinteresse pelas coisas de Deus",
-        "Falta de zelo apostólico (não evangelizar, não ajudar os outros na fé)",
-        "Conformismo com o pecado próprio ou alheio",
-        "Buscar o sucesso pessoal acima da vontade divina"
+        "Fui preguiçoso espiritualmente (não busquei crescer na fé)",
+        "Me desinteressei pelas coisas de Deus",
+        "Fui indiferente no zelo apostólico (não evangelizei, nem ajudei outros na fé)",
+        "Fui conivente com o pecado, meu ou alheio",
+        "Busquei o sucesso pessoal acima da vontade divina",
+        "Agi por egoísmo, pensando apenas em mim",
+        "Fui omisso diante de injustiças ou sofrimentos ao meu redor"
+    ],
+        "Pecados veniais (faltas leves que enfraquecem minha alma, mas não rompem a amizade com Deus)": [
+        "Falei palavras impacientes, com leve irritação ou impolidez",
+        "Fui negligente em atos de caridade com os mais próximos",
+        "Fiz piadas ou comentários inapropriados, sem intenção grave",
+        "Julguei os outros interiormente, mesmo sem espalhar críticas",
+        "Tive distrações voluntárias durante a oração, sem esforço para me recolher",
+        "Faltei com pequenas responsabilidades no trabalho ou estudo por descuido",
+        "Deixei de ajudar alguém por comodismo, ainda que pudesse fazê-lo",
+        "Busquei meu conforto ou prazer em coisas pequenas, sem moderação",
+        "Fui impaciente com pessoas mais lentas ou com ideias diferentes das minhas",
+        "Usei meu tempo de forma egoísta, deixando de servir mais ao próximo"
+    ],
+    
+    "Pecados capitais (raízes do pecado que geram muitas outras faltas)": [
+        "Cedi à soberba, agindo com orgulho ou querendo ser superior aos outros",
+        "Fui avarento, apegado ao dinheiro ou a bens materiais, sem generosidade",
+        "Entreguei-me à luxúria, buscando prazeres impuros nos pensamentos, olhares ou ações",
+        "Fui invejoso, entristecendo-me com o bem ou sucesso alheio",
+        "Alimentei a gula, comendo ou bebendo além do necessário por puro prazer",
+        "Fui irado, permitindo que a raiva dominasse minhas palavras ou atitudes",
+        "Fui preguiçoso, negligente no cumprimento dos meus deveres espirituais ou materiais"
     ]
-}
 
+}
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -145,9 +192,328 @@ def download():
     return Response(pdf_io.read(),
                     mimetype="application/pdf",
                     headers={"Content-Disposition": "attachment;filename=meus_pecados.pdf"})
+@app.route("/oracoes")
+def oracoes():
+    oracoes_lista = [
+        {
+            "id": 1,
+            "titulo": "Oração do Arrependimento",
+            "texto": (
+                "Meu Jesus, por serdes tão bom, e por me amardes tanto, vos agradeço por me terdes esperado até agora e não terdes permitido que eu morresse em pecado. "
+                "Peço-vos, por vossa paixão e morte na cruz, perdoai-me todos os meus pecados e fazei-me verdadeiramente penitente..."
+            ),
+            "descricao": "Para momentos de reflexão e conversão interior."
+        },
+        {
+            "id": 2,
+            "titulo": "Confissão Geral",
+            "texto": (
+                "Senhor meu Deus, reconheço diante de Vós que pequei muitas vezes por pensamentos, palavras, atos e omissões. "
+                "Arrependo-me sinceramente de todas as minhas faltas e ofensas, especialmente daquelas que mais feriram o vosso amor. "
+                "Com humildade, suplico a vossa misericórdia e, como o filho pródigo, digo: Pai, pequei contra o Céu e contra Vós. "
+                "Não sou digno de ser chamado vosso filho. Tende piedade de mim, Senhor. Amém."
+            ),
+            "descricao": "Ideal para preparação antes da confissão sacramental."
+        },
+        {
+            "id": 3,
+            "titulo": "Miserere Mei Deus",
+            "texto": (
+                "Tende piedade de mim, ó Deus, segundo a vossa misericórdia; "
+                "segundo a grandeza da vossa compaixão, apagai a minha culpa. "
+                "Lavai-me totalmente da minha iniquidade, e purificai-me do meu pecado. "
+                "Criai em mim, ó Deus, um coração puro e renovai em meu peito um espírito firme."
+            ),
+            "descricao": "Um dos salmos penitenciais mais conhecidos da tradição cristã."
+        },
+        {
+            "id": 4,
+            "titulo": "Do Profundo",
+            "texto": (
+                "Das profundezas clamo a Vós, Senhor. Senhor, escutai a minha voz! "
+                "Estejam atentos os vossos ouvidos às súplicas da minha prece. "
+                "Se levardes em conta nossas faltas, Senhor, quem poderá subsistir? "
+                "Mas em Vós se encontra o perdão, e por isso Vos teme com reverência."
+            ),
+            "descricao": "Uma poderosa expressão de esperança na misericórdia divina."
+        },
+        {
+            "id": 5,
+            "titulo": "Salmo 6",
+            "texto": (
+                "Senhor, não me repreendais em vossa ira, nem me castigueis no vosso furor. "
+                "Tende piedade de mim, Senhor, pois desfaleço; curai-me, Senhor, pois meus ossos tremem. "
+                "A minha alma está profundamente perturbada... Salvai-me por causa da vossa misericórdia!"
+            ),
+            "descricao": "Suplica o perdão e a cura espiritual e física."
+        },
+        {
+            "id": 6,
+            "titulo": "Acto de Contrição",
+            "texto": (
+                "Meu Deus, arrependo-me de todo o coração de Vos ter ofendido, "
+                "porque sois infinitamente bom e digno de ser amado sobre todas as coisas. "
+                "Proponho firmemente, com o auxílio da vossa graça, emendar-me e evitar as ocasiões de pecado. "
+                "Senhor, pela paixão de Jesus Cristo, tende piedade de mim. Amém."
+            ),
+            "descricao": "Expressa arrependimento sincero e desejo de mudança."
+        },
+        {
+            "id": 7,
+            "titulo": "Oração à Virgem Maria",
+            "texto": (
+                "Ó Maria Santíssima, Mãe de Deus e minha Mãe, refugio-me sob a vossa proteção maternal. "
+                "Vós que sois a Medianeira de todas as graças, intercedei por mim junto a vosso Filho Jesus. "
+                "Alcançai-me a graça do verdadeiro arrependimento, uma boa confissão e a perseverança no bem. "
+                "Acompanhai-me em todos os momentos da vida, sobretudo na hora da morte. Amém."
+            ),
+            "descricao": "Peça a intercessão de Nossa Senhora após o exame de consciência."
+        }
+    ]
+    return render_template("oracoes.html", oracoes=oracoes_lista)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
+
+static/ccs/style.css
+/* Estilo base da página */
+body.page-body {
+  font-family: Georgia, serif;
+  padding: 40px;
+  color: #333;
+  background-color: #fffef8;
+}
+
+/* Título principal */
+h1.title {
+  text-align: center;
+  color: #6a4f28;
+  margin-bottom: 30px;
+}
+
+/* Títulos de seções como "1. Amar a Deus sobre todas as coisas" */
+.section-title {
+  color: #4a3820;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+/* Card de mandamentos - com linha dourada à esquerda */
+.card-section {
+  border-left: 5px solid #d4af37; /* Linha dourada à esquerda */
+  background-color: #fffef8;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilização do texto dentro dos cards */
+.card-section h3 {
+  color: #4a3820;
+  font-weight: bold;
+}
+
+/* Lista de pecados */
+.list-group-item {
+  border: none;
+  color: #333;
+  padding-left: 0;
+}
+
+.list-group-flush .list-group-item {
+  border-width: 0;
+}
+
+/* Ícone centralizado */
+.icon {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.icon img {
+  width: 120px;
+  border-radius: 10px;
+  border: 3px solid #d4af37;
+}
+
+/* Botões */
+button.btn {
+  padding: 10px 20px;
+  background-color: #d4af37;
+  border: none;
+  border-radius: 6px;
+  color: #4a3820;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.btn:hover {
+  background-color: #b38c1a;
+  color: white;
+}
+
+/* Área de digitação de pecados personalizados */
+textarea.form-control {
+  border: 2px solid #d4af37;
+  border-radius: 6px;
+  padding: 10px;
+  font-family: Georgia, serif;
+  color: #4a3820;
+  resize: vertical;
+}
+
+/* Player de áudio */
+.audio-player {
+  margin: 1rem auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+.audio-player audio {
+  width: 100%;
+  border: 2px solid #d4af37;
+  border-radius: 8px;
+  padding: 8px;
+  background-color: #fffef8;
+}
+
+/* Citação bíblica */
+blockquote {
+  font-style: italic;
+  color: #4a3820;
+  margin-top: 1rem;
+}
+
+/* Estilização do menu flutuante */
+.dropdown-menu {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 9998;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  width: 250px;
+}
+
+.dropdown-item {
+  text-decoration: none;
+  color: #4a3820; /* Cor do texto */
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #fffef8;
+  border: 1px solid #d4af37;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #b38c1a;
+  color: white;
+}
+
+/* Link de volta para a página inicial */
+.back-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #4a3820;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+/* Garantia de display flex para o dropdown */
+.dropdown-menu {
+  display: none;
+  flex-direction: column;
+}
+
+/* Forçar display:flex quando ativo */
+.dropdown-menu.show {
+  display: flex;
+}
+.dropdown-item {
+  text-decoration: none;
+  color: #4a3820; /* Cor personalizada */
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #fffef8;
+  border: 1px solid #d4af37;
+  display: block;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: #b38c1a;
+  color: white;
+}
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #d4af37;
+  color: #4a3820;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 9999;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.floating-btn:hover {
+  transform: scale(1.1);
+}
+
+.dropdown-menu {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 9998;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  width: 250px;
+}
+
+.dropdown-item {
+  text-decoration: none;
+  color: #4a3820;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #fffef8;
+  border: 1px solid #d4af37;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.dropdown-item:hover {
+  background-color: #b38c1a;
+  color: white;
+}
 templates/index.html
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -156,76 +522,94 @@ templates/index.html
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Exame de Consciência</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
   <style>
     @media (max-width: 768px) {
       .container {
         padding: 1rem;
       }
-
       textarea.form-control {
         width: 100% !important;
         font-size: 1rem;
       }
-
       .btn {
         width: 100%;
         font-size: 1rem;
       }
     }
+
+    .audio-player {
+      display: none;
+      margin: 1rem auto;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .audio-player audio {
+      width: 100%;
+      border: 2px solid #d4af37;
+      border-radius: 8px;
+      padding: 8px;
+      background-color: #fffef8;
+    }
   </style>
 </head>
 <body class="page-body">
-  <div class="container my-5">
-    <div class="icon">
-      <img src="{{ url_for('static', filename='img/cristo_pantocrator.jpg') }}" alt="Cristo Pantocrator" />
-    </div>
-    <h1 class="title">📜 Exame de Consciência</h1>
 
-    <form method="POST" id="form-pecados">
-      {% for mandamento, lista in pecados.items() %}
-      <div class="card mb-3 card-section">
-        <div class="card-header fw-bold section-title">{{ mandamento }}</div>
-        <div class="card-body">
-          {% for pecado in lista %}
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="{{ mandamento }}" value="{{ loop.index0 }}" id="{{ mandamento }}-{{ loop.index0 }}" />
-            <label class="form-check-label" for="{{ mandamento }}-{{ loop.index0 }}">{{ pecado }}</label>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endfor %}
+<!-- Player de Áudio Oculto -->
+<audio id="audio" loop>
+  <source src="{{ url_for('static', filename='audio/miserere_mei_deus.mp3') }}" type="audio/mpeg">
+  Seu navegador não suporta o elemento de áudio.
+</audio>
 
-      <div class="mb-3">
-        <label for="custom" class="form-label fw-bold">Outro(s) pecado(s) que deseja digitar:</label>
-        <textarea class="form-control" id="custom" name="custom" rows="3" placeholder="Digite livremente..."></textarea>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Gerar minha lista</button>
-
-    </form>
-
-    {% if resultado %}
-    <hr class="my-5" />
-    <h2 class="section-title">📄 Seus pecados selecionados:</h2>
-    <form method="POST" action="/download" id="form-download">
-      <input type="hidden" name="html_conteudo" id="html_conteudo" />
-
-      <ul class="list-group my-3 list-peccados">
-        {% for mandamento, lista in resultado.items() %}
-        <li class="list-group-item list-header">{{ mandamento }}</li>
-        {% for item in lista %}
-        <li class="list-group-item list-item">{{ item }}</li>
-        {% endfor %}
-        {% endfor %}
-      </ul>
-
-      <button type="submit" class="btn btn-success">📅 Baixar lista como PDF</button>
-
-    </form>
-    {% endif %}
+<!-- Conteúdo Principal -->
+<div class="container my-5">
+  <div class="icon">
+    <img src="{{ url_for('static', filename='img/cristo_pantocrator.jpg') }}" alt="Cristo Pantocrator" />
   </div>
+  <h1 class="title">📜 Exame de Consciência</h1>
+  <form method="POST" id="form-pecados">
+    {% for mandamento, lista in pecados.items() %}
+    <div class="card mb-3 card-section">
+      <div class="card-header fw-bold section-title">{{ mandamento }}</div>
+      <div class="card-body">
+        {% for pecado in lista %}
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="{{ mandamento }}" value="{{ loop.index0 }}" id="{{ mandamento }}-{{ loop.index0 }}" />
+          <label class="form-check-label" for="{{ mandamento }}-{{ loop.index0 }}">{{ pecado }}</label>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+    <div class="mb-3">
+      <label for="custom" class="form-label fw-bold">Outro(s) pecado(s) que deseja digitar:</label>
+      <textarea class="form-control" id="custom" name="custom" rows="3" placeholder="Digite livremente..."></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Gerar minha lista</button>
+  </form>
 
+  {% if resultado %}
+  <hr class="my-5" />
+  <h2 class="section-title">📄 Seus pecados selecionados:</h2>
+  <form method="POST" action="/download" id="form-download">
+    <input type="hidden" name="html_conteudo" id="html_conteudo" />
+
+    <ul class="list-group my-3 list-peccados">
+      {% for mandamento, lista in resultado.items() %}
+      <li class="list-group-item list-header">{{ mandamento }}</li>
+      {% for item in lista %}
+      <li class="list-group-item list-item">{{ item }}</li>
+      {% endfor %}
+      {% endfor %}
+    </ul>
+
+    <button type="submit" class="btn btn-success">📅 Baixar lista como PDF</button>
+  </form>
+  {% endif %}
+</div>
+
+<!-- Script para geração do PDF -->
 <script>
   document.getElementById('form-download')?.addEventListener('submit', function(event) {
     event.preventDefault();
@@ -290,9 +674,237 @@ templates/index.html
     this.submit();
   });
 </script>
+
+<!-- Botão Flutuante -->
+<style>
+  .floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #d4af37;
+    color: #4a3820;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 9999;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .floating-btn:hover {
+    transform: scale(1.1);
+  }
+
+  .dropdown-menu {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 9998;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    width: 250px;
+  }
+
+  .dropdown-item {
+    text-decoration: none;
+    color: #4a3820;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #fffef8;
+    border: 1px solid #d4af37;
+    transition: all 0.2s ease;
+  }
+
+  .dropdown-item:hover {
+    background-color: #b38c1a;
+    color: white;
+  }
+</style>
+
+<!-- Botão Flutuante -->
+<button id="floatingBtn" class="floating-btn">📖</button>
+
+<!-- Menu Suspenso -->
+<div id="dropdownMenu" class="dropdown-menu">
+  <a href="/oracoes#Oracao-do-Arrependimento" class="dropdown-item">Oração do Arrependimento</a>
+  <a href="/oracoes#Confissao-Geral" class="dropdown-item">Confissão Geral</a>
+  <a href="/oracoes#Miserere-Mei-Deus" class="dropdown-item">Miserere Mei Deus</a>
+  <a href="/oracoes#Do-Profundo" class="dropdown-item">Do Profundo</a>
+  <a href="/oracoes#Salmo-6" class="dropdown-item">Salmo 6</a>
+  <a href="/oracoes#Acto-de-Contricao" class="dropdown-item">Acto de Contrição</a>
+  <a href="/oracoes#Oracao-a-Virgem-Maria" class="dropdown-item">Oração à Virgem Maria</a>
+</div>
+
+<!-- Script para tocar áudio na primeira interação -->
+<script>
+  let audioTocado = false;
+  const audio = document.getElementById('audio');
+
+  function initAudio() {
+    if (!audioTocado && audio) {
+      audio.muted = true; // Começa mudo para evitar bloqueio
+      audio.play()
+        .then(() => {
+          console.log("Áudio iniciado com sucesso");
+          audio.muted = false; // Remove o mudo após iniciar
+          audioTocado = true;
+        })
+        .catch(err => {
+          console.error("Erro ao tocar o áudio:", err);
+        });
+    }
+  }
+
+  window.addEventListener('click', initAudio);
+  window.addEventListener('touchstart', initAudio);
+</script>
+<!-- Script para mostrar/ocultar menu flutuante -->
+<script>
+  const btn = document.getElementById('floatingBtn');
+  const dropdown = document.getElementById('dropdownMenu');
+
+  btn.addEventListener('click', () => {
+    dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+  });
+
+  window.addEventListener('click', (e) => {
+    if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = 'none';
+    }
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let audioTocado = false;
+    const audio = document.getElementById('audio');
+
+    function initAudio() {
+      if (!audioTocado && audio && audio.src) {
+        audio.muted = true;
+        audio.play()
+          .then(() => {
+            console.log("Áudio iniciado com sucesso");
+            audio.muted = false;
+            audioTocado = true;
+          })
+          .catch(err => {
+            console.error("Erro ao iniciar o áudio:", err);
+          });
+      }
+    }
+
+    // Clique em qualquer lugar da página
+    window.addEventListener('click', initAudio);
+    window.addEventListener('touchstart', initAudio);
+
+    // Clique no menu flutuante também conta como interação
+    const floatingBtn = document.getElementById('floatingBtn');
+    if (floatingBtn) {
+      floatingBtn.addEventListener('click', initAudio);
+    }
+  });
+</script>
 </body>
 </html>
-templates/pdf_template.html
+templates/liturgia.html
+{% extends "base.html" %}
+{% block content %}
+<h1>📖 Leitura Bíblica do Dia</h1>
+
+<h2>📅 {{ dados.dia }}</h2>
+
+<h3>Old Testament</h3>
+<p>{{ dados.primeiraLeitura.texto }}</p>
+<p><em>{{ dados.primeiraLeitura.referencia }}</em></p>
+
+<h3>Salmo</h3>
+<p>{{ dados.salmo.texto }}</p>
+<p><em>{{ dados.salmo.referencia }}</em></p>
+
+<h3>✠ Evangelho</h3>
+<p>{{ dados.evangelho.texto }}</p>
+<p><em>{{ dados.evangelho.referencia }}</em></p>
+
+<p>℣ Santo do dia: {{ dados.santo }}</p>
+
+<a href="/" class="btn btn-primary">← Voltar</a>
+{% endblock %}
+templates/oracoes.html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Orações Católicas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    .card-oracao {
+      margin-bottom: 2rem;
+      border-left: 5px solid #d4af37;
+      background-color: #fffef8;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .card-oracao h3 {
+      color: #4a3820;
+      font-weight: bold;
+    }
+
+    .descricao {
+      font-style: italic;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #4a3820;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="page-body">
+
+<div class="container my-5">
+  <div class="icon">
+    <img src="{{ url_for('static', filename='img/cristo_pantocrator.jpg') }}" alt="Cristo Pantocrator" />
+  </div>
+
+  <h1 class="title">📖 Orações Católicas</h1>
+
+  {% for oracao in oracoes %}
+  <div class="card-oracao" id="{{ oracao.titulo | replace(' ', '-') | replace('à', 'a') | replace('á','a') | replace('é','e') | replace('í','i') | replace('ó','o') | replace('ú','u') | replace('ç','c') }}">
+    <h3>{{ oracao.titulo }}</h3>
+    {% if oracao.descricao %}
+    <p class="descricao">{{ oracao.descricao }}</p>
+    {% endif %}
+    <p>{{ oracao.texto }}</p>
+  </div>
+  {% endfor %}
+
+  <a href="/" class="back-link">← Voltar ao Exame de Consciência</a>
+</div>
+
+</body>
+</html>templates/pdf_template.html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -347,86 +959,3 @@ templates/pdf_template.html
   {% endfor %}
 </body>
 </html>
-static/css/style.css
-body.page-body {
-  font-family: Georgia, serif;
-  padding: 40px;
-  color: #333;
-  background-color: #fffef8;
-}
-
-h1.title {
-  text-align: center;
-  color: #6a4f28;
-  margin-bottom: 30px;
-}
-
-.section-title {
-  color: #4a3820;
-  margin-bottom: 15px;
-}
-
-.card-section {
-  border-radius: 10px;
-  border: 3px solid #d4af37;
-  background-color: #fffef8;
-  padding: 10px;
-  margin-bottom: 20px;
-}
-
-.list-peccados {
-  list-style-type: square;
-  padding-left: 20px;
-}
-
-.list-header {
-  background-color: #6a4f28;
-  color: white;
-  font-weight: bold;
-  padding: 10px;
-  margin-top: 20px;
-}
-
-.list-item {
-  border: none;
-  color: #333;
-  padding-left: 20px;
-}
-
-.icon {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.icon img {
-  width: 120px;
-  border-radius: 10px;
-  border: 3px solid #d4af37;
-}
-
-/* Botões */
-button.btn {
-  padding: 10px 20px;
-  background-color: #d4af37;
-  border: none;
-  border-radius: 6px;
-  color: #4a3820;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button.btn:hover {
-  background-color: #b38c1a;
-  color: white;
-}
-
-/* Textarea */
-textarea.form-control {
-  border: 2px solid #d4af37;
-  border-radius: 6px;
-  padding: 10px;
-  font-family: Georgia, serif;
-  color: #4a3820;
-  resize: vertical;
-}

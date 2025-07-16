@@ -271,6 +271,41 @@ def oracoes():
     ]
     return render_template("oracoes.html", oracoes=oracoes_lista)
 
+import requests
+from datetime import datetime
+
+@app.route("/liturgia")
+def liturgia():
+    try:
+        # Chama a API da liturgia diária
+        response = requests.get("https://liturgia.up.railway.app/")
+        response.raise_for_status()
+        dados_api = response.json()
+
+        # Formata os dados para o template
+        dados = {
+            "dia": datetime.now().strftime("%d/%m/%Y"),
+            "santo": dados_api.get("liturgia", {}).get("santo", "Não informado"),
+            "primeiraLeitura": {
+                "texto": dados_api.get("liturgia", {}).get("leitura1", "Não encontrada"),
+                "referencia": "Primeira Leitura"
+            },
+            "salmo": {
+                "texto": dados_api.get("liturgia", {}).get("salmo", "Não encontrado"),
+                "referencia": "Salmo"
+            },
+            "evangelho": {
+                "texto": dados_api.get("liturgia", {}).get("evangelho", "Não encontrado"),
+                "referencia": "Evangelho"
+            }
+        }
+
+        return render_template("liturgia.html", dados=dados)
+
+    except Exception as e:
+        return f"Erro ao carregar a liturgia: {e}", 500
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
 
