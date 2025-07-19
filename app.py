@@ -327,6 +327,68 @@ def liturgia():
     except Exception as e:
         return f"Erro ao carregar a liturgia: {e}", 500
 
+@app.route("/terco")
+def terco():
+    mistérios = {
+        "Gozosos": [
+            "1. A Anunciação do Anjo a Maria",
+            "2. A Visitação de Maria a Isabel",
+            "3. O Nascimento de Jesus em Belém",
+            "4. A Apresentação do Menino Jesus no Templo",
+            "5. O Encontro do Menino Jesus no Templo"
+        ],
+        "Dolorosos": [
+            "1. Jesus agoniza no Horto",
+            "2. Jesus é açoitado",
+            "3. Jesus é coroado de espinhos",
+            "4. Jesus carrega a Cruz",
+            "5. Jesus é crucificado"
+        ],
+        "Gloriosos": [
+            "1. Ressurreição de Jesus",
+            "2. Ascensão de Jesus",
+            "3. Descida do Espírito Santo",
+            "4. Assunção de Maria",
+            "5. Coroação de Maria"
+        ],
+        "Luminosos": [
+            "1. Batismo de Jesus no Jordão",
+            "2. Auto-revelação de Jesus em Caná",
+            "3. Anúncio do Reino de Deus",
+            "4. Transfiguração de Jesus",
+            "5. Instituição da Eucaristia"
+        ]
+    }
+
+    oracoes = {
+        "Sinal da Cruz": "Em nome do Pai, e do Filho e do Espírito Santo. Amém.",
+        "Oferecimento": "Divino Jesus, nós vos oferecemos este terço que vamos rezar, meditando nos mistérios da nossa redenção. Concedei-nos, pela intercessão da Virgem Maria, Mãe de Deus e nossa Mãe, as virtudes que nos são necessárias para bem rezá-lo e a graça de ganharmos as indulgências desta santa devoção.",
+        "Credo": "Creio em Deus Pai todo-poderoso, criador do céu e da terra. E em Jesus Cristo, seu único Filho, nosso Senhor...",
+        "Pai Nosso": "Pai nosso que estais no céu, santificado seja o vosso nome...",
+        "Ave-Marias": [
+            "Pela fé – Ave Maria…",
+            "Pela esperança – Ave Maria…",
+            "Pela caridade – Ave Maria…"
+        ],
+        "Gloria": "Glória ao Pai, ao Filho e ao Espírito Santo. Como era no princípio, agora e sempre. Amém.",
+        "Jaculatoria": "Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu e socorrei principalmente as que mais precisarem.",
+        "Mistérios": {
+            "Segunda": "Gozosos",
+            "Terça": "Dolorosos",
+            "Quarta": "Gloriosos",
+            "Quinta": "Luminosos",
+            "Sexta": "Dolorosos",
+            "Sábado": "Gozosos",
+            "Domingo": "Gloriosos"
+        },
+        "Final": {
+            "Salve": "Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva...",
+            "OraçãoPapa": "Senhor, nós vos pedimos por vosso vigário o Papa, por nosso bispo, por todos os sacerdotes e fiéis...",
+            "Encerramento": "Em nome do Pai, e do Filho, e do Espírito Santo. Amém."
+        }
+    }
+
+    return render_template("terco.html", mistérios=mistérios, oracoes=oracoes)
 # ✅ Execução da aplicação
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
