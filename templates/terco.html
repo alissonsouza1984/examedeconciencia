@@ -42,66 +42,64 @@
     <div class="icon">
       <img src="{{ url_for('static', filename='img/cristo_pantocrator.jpg') }}" alt="Cristo Pantocrator" />
     </div>
-    <h1 class="titulo-terco">📿 Santo Rosário – Guia Completo</h1>
+    <h1 class="titulo-terco">🕊️ SANTO ROSÁRIO COMPLETO</h1>
 
     <div class="card-terco">
-      <h3>📜 Mistérios Gozosos</h3>
+      <h3>1. SINAL DA CRUZ</h3>
+      <p>{{ oracoes['Sinal da Cruz'] }}</p>
+    </div>
+
+    <div class="card-terco">
+      <h3>2. OFERECIMENTO DO SANTO ROSÁRIO</h3>
+      <p>{{ oracoes['Oferecimento'] }}</p>
+    </div>
+
+    <div class="card-terco">
+      <h3>3. ORAÇÃO DO ANJO DO SENHOR</h3>
+      <p>{{ oracoes['Oração do Anjo'] }}</p>
+    </div>
+
+    <div class="card-terco">
+      <h3>4. CREDO</h3>
+      <p>{{ oracoes['Credo'] }}</p>
+    </div>
+
+    <div class="card-terco">
+      <h3>5. CADA DEZENA DO TERÇO CONTÉM:</h3>
+      <ul>
+        <li>1 Pai-Nosso</li>
+        <li>10 Ave-Marias</li>
+        <li>1 Glória ao Pai</li>
+        <li>Jaculatória: Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno...</li>
+      </ul>
+    </div>
+
+    {% for tipo, mist in mistérios.items() %}
+    <div class="card-terco">
+      <h3>📜 {{ tipo.upper() }}</h3>
+      <p><strong>Mistérios:</strong></p>
       <ol>
-        {% for item in mistérios['Gozosos'] %}
+        {% for item in mist %}
         <li>{{ item }}</li>
         {% endfor %}
       </ol>
       <div class="audio-player">
         <audio controls>
-          <source src="{{ url_for('static', filename='audio/terco/goz.mp3') }}" type="audio/mpeg">
+          <source src="{{ url_for('static', filename='audio/terco/' + tipo[:3].lower() ~ '.mp3') }}" type="audio/mpeg">
           Seu navegador não suporta o elemento de áudio.
         </audio>
       </div>
     </div>
+    {% endfor %}
 
     <div class="card-terco">
-      <h3>🔥 Mistérios Dolorosos</h3>
-      <ol>
-        {% for item in mistérios['Dolorosos'] %}
-        <li>{{ item }}</li>
-        {% endfor %}
-      </ol>
-      <div class="audio-player">
-        <audio controls>
-          <source src="{{ url_for('static', filename='audio/terco/dor.mp3') }}" type="audio/mpeg">
-          Seu navegador não suporta o elemento de áudio.
-        </audio>
-      </div>
+      <h3>7. SALVE RAINHA</h3>
+      <p>{{ oracoes['Final']['Salve'] }}</p>
     </div>
 
     <div class="card-terco">
-      <h3>🕊️ Mistérios Gloriosos</h3>
-      <ol>
-        {% for item in mistérios['Gloriosos'] %}
-        <li>{{ item }}</li>
-        {% endfor %}
-      </ol>
-      <div class="audio-player">
-        <audio controls>
-          <source src="{{ url_for('static', filename='audio/terco/glo.mp3') }}" type="audio/mpeg">
-          Seu navegador não suporta o elemento de áudio.
-        </audio>
-      </div>
-    </div>
-
-    <div class="card-terco">
-      <h3>💡 Mistérios Luminosos</h3>
-      <ol>
-        {% for item in mistérios['Luminosos'] %}
-        <li>{{ item }}</li>
-        {% endfor %}
-      </ol>
-      <div class="audio-player">
-        <audio controls>
-          <source src="{{ url_for('static', filename='audio/terco/lum.mp3') }}" type="audio/mpeg">
-          Seu navegador não suporta o elemento de áudio.
-        </audio>
-      </div>
+      <h3>8. LADAINHA DE NOSSA SENHORA (opcional)</h3>
+      <p>{{ oracoes['Final']['Ladainha'] }}</p>
     </div>
 
     <a href="/" class="back-link">← Voltar ao Exame de Consciência</a>

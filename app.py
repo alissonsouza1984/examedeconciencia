@@ -363,15 +363,8 @@ def terco():
     oracoes = {
         "Sinal da Cruz": "Em nome do Pai, e do Filho e do Espírito Santo. Amém.",
         "Oferecimento": "Divino Jesus, nós vos oferecemos este terço que vamos rezar, meditando nos mistérios da nossa redenção. Concedei-nos, pela intercessão da Virgem Maria, Mãe de Deus e nossa Mãe, as virtudes que nos são necessárias para bem rezá-lo e a graça de ganharmos as indulgências desta santa devoção.",
-        "Credo": "Creio em Deus Pai todo-poderoso, criador do céu e da terra. E em Jesus Cristo, seu único Filho, nosso Senhor...",
-        "Pai Nosso": "Pai nosso que estais no céu, santificado seja o vosso nome...",
-        "Ave-Marias": [
-            "Pela fé – Ave Maria…",
-            "Pela esperança – Ave Maria…",
-            "Pela caridade – Ave Maria…"
-        ],
-        "Gloria": "Glória ao Pai, ao Filho e ao Espírito Santo. Como era no princípio, agora e sempre. Amém.",
-        "Jaculatoria": "Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu e socorrei principalmente as que mais precisarem.",
+        "Oração do Anjo": "O Anjo do Senhor anunciou a Maria. E ela concebeu do Espírito Santo. Ave Maria... Eis aqui a serva do Senhor. Faça-se em mim segundo a Vossa palavra. Ave Maria... E o Verbo de Deus se fez carne. E habitou entre nós. Ave Maria... Rogai por nós, Santa Mãe de Deus. Para que sejamos dignos das promessas de Cristo.",
+        "Credo": "Creio em Deus Pai todo-poderoso, criador do céu e da terra... (completo)",
         "Mistérios": {
             "Segunda": "Gozosos",
             "Terça": "Dolorosos",
@@ -383,8 +376,7 @@ def terco():
         },
         "Final": {
             "Salve": "Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva...",
-            "OraçãoPapa": "Senhor, nós vos pedimos por vosso vigário o Papa, por nosso bispo, por todos os sacerdotes e fiéis...",
-            "Encerramento": "Em nome do Pai, e do Filho, e do Espírito Santo. Amém."
+            "Ladainha": "Senhor, tende piedade de nós... Cristo, tende piedade de nós... Senhor, tende piedade de nós..."
         }
     }
 
