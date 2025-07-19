@@ -8,13 +8,14 @@
     .card-terco {
       border-left: 5px solid #d4af37;
       background-color: #fffef8;
-      padding: 1rem;
+      padding: 1.5rem;
       border-radius: 8px;
       margin-bottom: 2rem;
     }
     .card-terco h3 {
       color: #4a3820;
       font-weight: bold;
+      font-size: 1.4rem;
     }
     .titulo-terco {
       font-size: 2rem;
@@ -32,8 +33,48 @@
     .back-link:hover {
       text-decoration: underline;
     }
+    .terco-imagem {
+      margin-top: 1rem;
+      text-align: center;
+    }
+    .terco-imagem img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 2px solid #d4af37;
+    }
     .audio-player {
       margin-top: 1rem;
+      text-align: center;
+    }
+    .audio-player audio {
+      width: 100%;
+      max-width: 600px;
+      border: 2px solid #d4af37;
+      border-radius: 8px;
+      padding: 5px;
+      background-color: #fffef8;
+    }
+    .passo-a-passo {
+      background-color: #f9f9f9;
+      padding: 1rem;
+      border-left: 3px solid #b38c1a;
+      border-radius: 4px;
+      font-style: italic;
+      color: #555;
+      margin-top: 1rem;
+    }
+    .versiculo {
+      background-color: #e8f0ff;
+      padding: 1rem;
+      border-left: 3px solid #0056b3;
+      border-radius: 4px;
+      margin-top: 1rem;
+      font-style: italic;
+      color: #222;
+    }
+    .versiculo strong {
+      color: #0056b3;
     }
   </style>
 </head>
@@ -42,64 +83,308 @@
     <div class="icon">
       <img src="{{ url_for('static', filename='img/cristo_pantocrator.jpg') }}" alt="Cristo Pantocrator" />
     </div>
-    <h1 class="titulo-terco">🕊️ SANTO ROSÁRIO COMPLETO</h1>
+    <h1 class="titulo-terco">🕊️ SANTO ROSÁRIO – GUIA COMPLETO</h1>
 
     <div class="card-terco">
       <h3>1. SINAL DA CRUZ</h3>
-      <p>{{ oracoes['Sinal da Cruz'] }}</p>
+      <p>Em nome do Pai, e do Filho e do Espírito Santo. Amém.</p>
+      <div class="passo-a-passo">
+        ✅ Toque a testa no "Pai", o peito no "Filho", o ombro esquerdo e depois o direito no "Espírito Santo".
+      </div>
     </div>
 
     <div class="card-terco">
-      <h3>2. OFERECIMENTO DO SANTO ROSÁRIO</h3>
-      <p>{{ oracoes['Oferecimento'] }}</p>
+      <h3>2. OFERECIMENTO DO TERÇO</h3>
+      <p>Divino Jesus, nós vos oferecemos este terço que vamos rezar, meditando nos mistérios da nossa redenção. Concedei-nos, pela intercessão da Virgem Maria, Mãe de Deus e nossa Mãe, as virtudes que nos são necessárias para bem rezá-lo e a graça de ganharmos as indulgências desta santa devoção.</p>
+      <div class="passo-a-passo">
+        ✅ Reze com atenção e amor. Ofereça o terço por alguém especial.
+      </div>
     </div>
 
     <div class="card-terco">
       <h3>3. ORAÇÃO DO ANJO DO SENHOR</h3>
-      <p>{{ oracoes['Oração do Anjo'] }}</p>
+      <p><strong>O Anjo do Senhor anunciou a Maria,</strong> e ela concebeu do Espírito Santo.</p>
+      <p>Ave Maria...</p>
+      <p><strong>Eis aqui a serva do Senhor,</strong> faça-se em mim segundo a Vossa palavra.</p>
+      <p>Ave Maria...</p>
+      <p><strong>E o Verbo de Deus se fez carne,</strong> e habitou entre nós.</p>
+      <p>Ave Maria...</p>
+      <p><strong>V. Rogai por nós, Santa Mãe de Deus.</strong></p>
+      <p><strong>R. Para que sejamos dignos das promessas de Cristo.</strong></p>
+      <p><strong>Amém.</strong></p>
+      <div class="passo-a-passo">
+        ✅ Reze essas três Ave-Marias uma após a outra, com atenção no significado de cada parte.
+      </div>
     </div>
 
     <div class="card-terco">
       <h3>4. CREDO</h3>
-      <p>{{ oracoes['Credo'] }}</p>
+      <p><strong>Creio em Deus Pai todo-poderoso, criador do céu e da terra;</strong> e em Jesus Cristo, seu único Filho, nosso Senhor; que foi concebido pelo poder do Espírito Santo, nasceu da Virgem Maria, padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado, desceu à mansão dos mortos, ressuscitou ao terceiro dia, subiu aos céus, está sentado à direita de Deus Pai todo-poderoso, donde há de vir a julgar os vivos e os mortos.</p>
+      <p><strong>Creio no Espírito Santo,</strong> na santa Igreja Católica, na comunhão dos santos, na remissão dos pecados, na ressurreição da carne, na vida eterna. Amém.</p>
+      <div class="passo-a-passo">
+        ✅ Diga com fé: você está confessando sua crença em tudo que a Igreja ensina.
+      </div>
     </div>
 
     <div class="card-terco">
-      <h3>5. CADA DEZENA DO TERÇO CONTÉM:</h3>
-      <ul>
-        <li>1 Pai-Nosso</li>
-        <li>10 Ave-Marias</li>
-        <li>1 Glória ao Pai</li>
-        <li>Jaculatória: Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno...</li>
-      </ul>
+      <h3>5. PAI-NOSSO</h3>
+      <p><strong>PAI NOSSO QUE ESTAIS NO CÉU,</strong> santificado seja o vosso nome;</p>
+      <p>Venha a nós o vosso reino;</p>
+      <p>seja feita a vossa vontade assim na terra como no céu;</p>
+      <p>o pão nosso de cada dia nos dai hoje;</p>
+      <p>perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido;</p>
+      <p>e não nos deixeis cair em tentação,</p>
+      <p>mas livrai-nos do mal. Amém.</p>
+      <div class="passo-a-passo">
+        ✅ Reze com atenção. Peça a Deus: "Que eu viva com santidade hoje."
+      </div>
     </div>
 
-    {% for tipo, mist in mistérios.items() %}
     <div class="card-terco">
-      <h3>📜 {{ tipo.upper() }}</h3>
-      <p><strong>Mistérios:</strong></p>
+      <h3>6. AVE-MARIAS (10 vezes por mistério)</h3>
+      <p><strong>Ave Maria, cheia de graça, o Senhor é convosco;</strong> bendita sois vós entre as mulheres, e bendito é o fruto do vosso ventre, Jesus.</p>
+      <p><strong>Santa Maria, Mãe de Deus,</strong> rogai por nós pecadores, agora e na hora da nossa morte. Amém.</p>
+      <div class="passo-a-passo">
+        ✅ Reze 10 vezes por cada mistério, pedindo: "Santa Maria, ajude-me a viver como Jesus."
+      </div>
+    </div>
+
+    <div class="card-terco">
+      <h3>7. GLÓRIA AO PAI</h3>
+      <p><strong>Glória ao Pai, ao Filho e ao Espírito Santo.</strong> Como era no princípio, agora e sempre. Amém.</p>
+      <div class="passo-a-passo">
+        ✅ Reze com alegria. Diga: "Eu agradeço a Deus por tudo!"
+      </div>
+    </div>
+
+    <div class="card-terco">
+      <h3>8. JACULATÓRIA</h3>
+      <p><strong>Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu e socorrei principalmente as que mais precisarem.</strong></p>
+      <div class="passo-a-passo">
+        ✅ Peça com fé. Pense nas pessoas que precisam de ajuda espiritual.
+      </div>
+    </div>
+
+    <!-- MISTÉRIOS GOZOSOS -->
+    <div class="card-terco">
+      <h3>📜 MISTÉRIOS GOZOSOS</h3>
       <ol>
-        {% for item in mist %}
-        <li>{{ item }}</li>
-        {% endfor %}
+        <li><strong>1. A Anunciação do Anjo a Maria</strong></li>
+        <div class="versiculo">
+          <strong>Lc 1, 26-38</strong> – "Eis a serva do Senhor. Faça-se em mim segundo a tua palavra."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/anunciacao.jpg') }}" alt="Anunciação do Anjo a Maria">
+        </div>
+
+        <li><strong>2. A Visitação de Maria a Isabel</strong></li>
+        <div class="versiculo">
+          <strong>Lc 1, 39-45</strong> – "Bendita és tu entre as mulheres e bendito é o fruto do teu ventre."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/visitacao.jpg') }}" alt="Visitação de Maria a Isabel">
+        </div>
+
+        <li><strong>3. O Nascimento de Jesus em Belém</strong></li>
+        <div class="versiculo">
+          <strong>Lc 2, 1-20</strong> – "Nasceu para vós um Salvador, que é Cristo Senhor."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/nascimento.jpg') }}" alt="Nascimento de Jesus em Belém">
+        </div>
+
+        <li><strong>4. A Apresentação de Jesus no Templo</strong></li>
+        <div class="versiculo">
+          <strong>Lc 2, 22-35</strong> – "Este menino é sinal de contradição."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/apresentacao.jpg') }}" alt="Apresentação de Jesus no Templo">
+        </div>
+
+        <li><strong>5. O Encontro de Jesus no Templo aos 12 anos</strong></li>
+        <div class="versiculo">
+          <strong>Lc 2, 41-52</strong> – "Não sabíeis que devo estar na casa de meu Pai?"
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/templo.jpg') }}" alt="Jesus no Templo aos 12 anos">
+        </div>
       </ol>
       <div class="audio-player">
         <audio controls>
-          <source src="{{ url_for('static', filename='audio/terco/' + tipo[:3].lower() ~ '.mp3') }}" type="audio/mpeg">
+          <source src="{{ url_for('static', filename='audio/terco/goz.mp3') }}" type="audio/mpeg">
           Seu navegador não suporta o elemento de áudio.
         </audio>
       </div>
     </div>
-    {% endfor %}
 
+    <!-- MISTÉRIOS DOLOROSOS -->
     <div class="card-terco">
-      <h3>7. SALVE RAINHA</h3>
-      <p>{{ oracoes['Final']['Salve'] }}</p>
+      <h3>🔥 MISTÉRIOS DOLOROSOS</h3>
+      <ol>
+        <li><strong>1. Jesus agoniza no Horto</strong></li>
+        <div class="versiculo">
+          <strong>Mt 26, 36-46</strong> – "Meu Pai, se é possível, afaste de mim este cálice."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/horto.jpg') }}" alt="Jesus agoniza no Horto">
+        </div>
+
+        <li><strong>2. Jesus é açoitado</strong></li>
+        <div class="versiculo">
+          <strong>Jo 19, 1-5</strong> – "Eis o homem!"
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/acoites.jpg') }}" alt="Jesus é açoitado">
+        </div>
+
+        <li><strong>3. Jesus é coroado de espinhos</strong></li>
+        <div class="versiculo">
+          <strong>Jo 19, 2-3</strong> – "Eles teceram uma coroa de espinhos e a puseram sobre a cabeça de Jesus."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/espinhos.jpg') }}" alt="Jesus coroado de espinhos">
+        </div>
+
+        <li><strong>4. Jesus carrega a Cruz</strong></li>
+        <div class="versiculo">
+          <strong>Lc 23, 26-32</strong> – "Tomai a vossa cruz e segui-me."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/cruz.jpg') }}" alt="Jesus carrega a Cruz">
+        </div>
+
+        <li><strong>5. Jesus é crucificado</strong></li>
+        <div class="versiculo">
+          <strong>Lc 23, 33-43</strong> – "Pai, perdoa-lhes, porque não sabem o que fazem."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/crucificacao.jpg') }}" alt="Jesus é crucificado">
+        </div>
+      </ol>
+      <div class="audio-player">
+        <audio controls>
+          <source src="{{ url_for('static', filename='audio/terco/dor.mp3') }}" type="audio/mpeg">
+          Seu navegador não suporta o elemento de áudio.
+        </audio>
+      </div>
     </div>
 
+    <!-- MISTÉRIOS GLORIOSOS -->
     <div class="card-terco">
-      <h3>8. LADAINHA DE NOSSA SENHORA (opcional)</h3>
-      <p>{{ oracoes['Final']['Ladainha'] }}</p>
+      <h3>🕊️ MISTÉRIOS GLORIOSOS</h3>
+      <ol>
+        <li><strong>1. Ressurreição de Jesus</strong></li>
+        <div class="versiculo">
+          <strong>Lc 24, 1-12</strong> – "Ele não está aqui; ressuscitou!"
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/ressurreicao.jpg') }}" alt="Ressurreição de Jesus">
+        </div>
+
+        <li><strong>2. Ascensão de Jesus</strong></li>
+        <div class="versiculo">
+          <strong>Mc 16, 19-20</strong> – "O Senhor Jesus, depois de falar com eles, foi elevado ao céu."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/ascensao.jpg') }}" alt="Ascensão de Jesus">
+        </div>
+
+        <li><strong>3. Descida do Espírito Santo</strong></li>
+        <div class="versiculo">
+          <strong>At 2, 1-4</strong> – "De repente, veio do céu um som como de um vento impetuoso."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/espirito_santo.jpg') }}" alt="Descida do Espírito Santo">
+        </div>
+
+        <li><strong>4. Assunção de Maria</strong></li>
+        <div class="versiculo">
+          <strong>Ap 12, 1</strong> – "Apareceu no céu uma mulher revestida de sol, com a lua debaixo dos pés e uma coroa de doze estrelas na cabeça."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/assuncao.jpg') }}" alt="Assunção de Maria">
+        </div>
+
+        <li><strong>5. Coroação de Maria</strong></li>
+        <div class="versiculo">
+          <strong>Ap 12, 1</strong> – "Vi uma mulher coroada com doze estrelas."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/coroacao.jpg') }}" alt="Coroação de Maria">
+        </div>
+      </ol>
+      <div class="audio-player">
+        <audio controls>
+          <source src="{{ url_for('static', filename='audio/terco/glo.mp3') }}" type="audio/mpeg">
+          Seu navegador não suporta o elemento de áudio.
+        </audio>
+      </div>
+    </div>
+
+    <!-- MISTÉRIOS LUMINOSOS -->
+    <div class="card-terco">
+      <h3>💡 MISTÉRIOS LUMINOSOS</h3>
+      <ol>
+        <li><strong>1. Batismo de Jesus no Jordão</strong></li>
+        <div class="versiculo">
+          <strong>Mt 3, 13-17</strong> – "Este é o meu Filho amado, em quem me comprazo."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/batismo.jpg') }}" alt="Batismo de Jesus no Jordão">
+        </div>
+
+        <li><strong>2. Bodas de Caná</strong></li>
+        <div class="versiculo">
+          <strong>Jos 2, 1-11</strong> – "Fazei o que Ele vos disser."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/bodas.jpg') }}" alt="Bodas de Caná">
+        </div>
+
+        <li><strong>3. Anúncio do Reino de Deus</strong></li>
+        <div class="versiculo">
+          <strong>Mt 4, 17</strong> – "Arrependei-vos, pois o Reino dos Céus está próximo."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/reino.jpg') }}" alt="Anúncio do Reino de Deus">
+        </div>
+
+        <li><strong>4. Transfiguração de Jesus</strong></li>
+        <div class="versiculo">
+          <strong>Mt 17, 1-9</strong> – "Este é o meu Filho amado. Escutai-O."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/transfiguracao.jpg') }}" alt="Transfiguração de Jesus">
+        </div>
+
+        <li><strong>5. Instituição da Eucaristia</strong></li>
+        <div class="versiculo">
+          <strong>Lc 22, 19-20</strong> – "Isto é o meu corpo, que é dado por vós. Fazei isto em memória de mim."
+        </div>
+        <div class="terco-imagem">
+          <img src="{{ url_for('static', filename='img/terco/eucaristia.jpg') }}" alt="Instituição da Eucaristia">
+        </div>
+      </ol>
+      <div class="audio-player">
+        <audio controls>
+          <source src="{{ url_for('static', filename='audio/terco/lum.mp3') }}" type="audio/mpeg">
+          Seu navegador não suporta o elemento de áudio.
+        </audio>
+      </div>
+    </div>
+
+    <!-- SALVE RAINHA -->
+    <div class="card-terco">
+      <h3>🕊️ 9. SALVE RAINHA</h3>
+      <p><strong>Salve, Rainha, Mãe de misericórdia,</strong> vida, doçura e esperança nossa, salve!</p>
+      <p>A vós bradamos, os degredados filhos de Eva, a vós suspiramos, gemendo e chorando neste vale de lágrimas.</p>
+      <p><strong>Eia pois, advogada nossa,</strong> esses vossos olhos misericordiosos a nós volvei e depois deste desterro, mostrai-nos Jesus, bendito fruto do vosso ventre. Ó clemente, ó piedosa, ó doce sempre Virgem Maria!</p>
+      <p><strong>V. Rogai por nós, Santa Mãe de Deus.</strong></p>
+      <p><strong>R. Para que sejamos dignos das promessas de Cristo.</strong></p>
+      <p><strong>Amém.</strong></p>
+      <div class="passo-a-passo">
+        ✅ Termine com amor a Salve Rainha. Peça a proteção de Nossa Senhora.
+      </div>
     </div>
 
     <a href="/" class="back-link">← Voltar ao Exame de Consciência</a>
